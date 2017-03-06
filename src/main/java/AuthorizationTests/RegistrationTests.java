@@ -7,20 +7,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Ivan on 03.03.2017.
- */
+
 public class RegistrationTests {
     private static WebDriver driver;
 
-    @BeforeMethod
-    public static void setup() {
+    @BeforeMethod(alwaysRun = true)
+    @Parameters({"baseUrl"})
+    public static void setup(String baseUrl) {
         driver = new ChromeDriver();
-        driver.get("http://leaseforlease.clever-solution.com/");
+        driver.get(baseUrl);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
@@ -31,7 +31,7 @@ public class RegistrationTests {
             e.printStackTrace();
         }
     }
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public static void teardown(){
         driver.quit();
     }
@@ -43,21 +43,21 @@ public class RegistrationTests {
         WebElement signup_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/div[2]/a/b"));
         signup_button.click();
         WebElement first_name = driver.findElement(By.id("first-name"));
-        first_name.sendKeys("first-name");
+        first_name.sendKeys("firstname");
         WebElement last_name = driver.findElement(By.id("second-name"));
-        last_name.sendKeys("second-name");
+        last_name.sendKeys("secondname");
         WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys("lihoysingree.com");
+        email.sendKeys("lihoy@singree.com");
         WebElement phone = driver.findElement(By.id("phone"));
         phone.sendKeys("0999999999");
         WebElement password = driver.findElement(By.id("password"));
         password.sendKeys("1111111");
-        WebElement confirm_password = driver.findElement(By.id("password"));
+        WebElement confirm_password = driver.findElement(By.id("confirm-pass"));
         confirm_password.sendKeys("1111111");
         WebElement zip_code = driver.findElement(By.id("zip"));
         zip_code.sendKeys("2222");
         WebElement signup_button_click = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div[2]/form/button"));
         signup_button_click.click();
-        sleep(8);
+        sleep(3);
     }
 }

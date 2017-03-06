@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" parallel="tests" thread-count="2">
+
+    <parameter name="loginEmail" value="v.lihoy+1@mail.ru"/>
+    <parameter name="loginPassword" value="111111"/>
+    <parameter name="baseURL" value="http://leaseforlease.clever-solution.com/"/>
+
+    <test name="PositiveLoginTest">
+        <classes>
+            <class name="AuthorizationTests.LoginTests" />
+        </classes>
+    </test>
+
+    <test name="PositiveRegistrationTest">
+        <classes>
+            <class name="AuthorizationTests.RegistrationTests" />
+        </classes>
+    </test>
+
+</suite>

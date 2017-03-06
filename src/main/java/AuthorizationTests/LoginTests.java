@@ -5,10 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class LoginTests {
     private static WebDriver driver;
 
-        @BeforeMethod
+        @BeforeMethod(alwaysRun = true)
         public static void setup() {
             driver = new ChromeDriver();
             driver.get("http://leaseforlease.clever-solution.com/");
@@ -32,25 +31,32 @@ public class LoginTests {
                 e.printStackTrace();
             }
         }
-        @AfterMethod
+        @AfterMethod(alwaysRun = true)
         public static void teardown(){
             driver.quit();
         }
+
+        @Parameters({"loginEmail", "loginPassword"})
         @Test()
-        public static void PositiveLoginTest() {
+        public static void PositiveLoginTest(String email, String Password) {
             WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
             signin_button.click();
             sleep(3);
             WebElement login_field = driver.findElement(By.id("exampleInputEmail1"));
-            login_field.sendKeys("v.lihoy+1@mail.ru");
+            login_field.sendKeys(email);
             WebElement password_field = driver.findElement(By.id("exampleInputPassword1"));
-            password_field.sendKeys("111111");
+            password_field.sendKeys(Password);
             WebElement sign_in_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/form[2]/button"));
             sign_in_button.click();
             sleep(3);
             Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='content']/div[2]/div[1]/div/div[1]")).isDisplayed());
             Assert.assertEquals("Carvoy", driver.getTitle());
             System.out.println("User is logged in");
+
+            driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+            boolean exists = driver.findElements( By.id(".//*[@id='content']/div[2]/div[1]/div/div[1]") ).size() != 0;
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
         }
         @Test(dataProvider = "data-provider")
         public static void NegativeLoginTests(String email, String pass){
@@ -65,6 +71,15 @@ public class LoginTests {
             sign_in_button.click();
             sleep(3);
             Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[1]/button")).isDisplayed());
+
+            boolean present;
+            try {
+                driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[1]/button"));
+                present = true;
+            } catch (NoSuchElementException e) {
+                present = false;
+            }
+
         }
         @DataProvider(name = "data-provider")
         public Object[][] dataProviderMethod(){
