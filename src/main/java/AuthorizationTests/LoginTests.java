@@ -36,16 +36,16 @@ public class LoginTests {
             driver.quit();
         }
 
-        @Parameters({"loginEmail", "loginPassword"})
+        //@Parameters({"loginEmail", "loginPassword"})
         @Test()
         public static void PositiveLoginTest(String email, String Password) {
             WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
             signin_button.click();
             sleep(3);
             WebElement login_field = driver.findElement(By.id("exampleInputEmail1"));
-            login_field.sendKeys(email);
+            login_field.sendKeys("v.lihoy+1@mail.ru");
             WebElement password_field = driver.findElement(By.id("exampleInputPassword1"));
-            password_field.sendKeys(Password);
+            password_field.sendKeys("111111");
             WebElement sign_in_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/form[2]/button"));
             sign_in_button.click();
             sleep(3);
@@ -79,7 +79,6 @@ public class LoginTests {
             } catch (NoSuchElementException e) {
                 present = false;
             }
-
         }
         @DataProvider(name = "data-provider")
         public Object[][] dataProviderMethod(){
@@ -94,7 +93,40 @@ public class LoginTests {
             data[3][1] = "";
             return data;
         }
+        @Test
+        public static void ForgotPasswordLinkPositiveTest(){
+            WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
+            signin_button.click();
+            sleep(3);
+            WebElement forgot_password_link = driver.findElement(By.linkText("FORGOT PASSWORD?"));
+            forgot_password_link.click();
+            sleep(3);
+            WebElement email_field = driver.findElement(By.id("exampleInputEmail11"));
+            email_field.sendKeys("lihoy@clever-solution.com");
+            WebElement submit_button = driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/form/button"));
+            //submit_button.click();
+            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a")).isDisplayed());
+        }
+        @Test(dependsOnMethods={"ForgotPasswordLinkPositiveTest"})
+        public static void ResetYourPassword(){
+            driver.get("https://mail.yandex.ua/");
+            WebElement username = driver.findElement(By.className("_nb-input-controller"));
+            username.sendKeys("lihoy@clever-solution.com");
+            WebElement password = driver.findElement(By.name("passwd"));
+            password.sendKeys("UZy&CU2C");
+            driver.findElement(By.xpath(".//*[@id='js']/body/div[1]/div[1]/div[1]/form/div[4]/span/button")).click();
+            sleep(3);
+            driver.findElement(By.xpath(".//*[@id='nb-1']/body/div[2]/div[4]/div/div[2]/div[3]/div[4]/div[1]/div/div/div[2]/div/div[1]")).click();
+            sleep(2);
+            driver.findElement(By.xpath(".//*[@id='nb-1']/body/div[2]/div[4]/div/div[2]/div[3]/div[4]/div[1]/div/div[3]/div/div/p[3]/a")).click();
+            sleep(10);
 
-    }
+            WebElement pass = driver.findElement(By.xpath("//*/div/input[@id='recoveryconfirmationform-password']"));
+            pass.sendKeys("111111");
+            WebElement re_pass = driver.findElement(By.xpath("//*/div/input[@id='recoveryconfirmationform-repassword']"));
+            re_pass.sendKeys("111111");
+            driver.findElement(By.linkText("Save")).click();
+        }
+}
 
 
