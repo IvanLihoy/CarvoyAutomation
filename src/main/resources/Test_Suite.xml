@@ -9,13 +9,13 @@
 
     <test name="PositiveLoginTest">
         <classes>
-            <class name="AuthorizationTests.LoginTests" />
+            <class name="AuthorizationTests.LoginPage.My_Login_Tests" />
         </classes>
     </test>
 
     <test name="PositiveRegistrationTest">
         <classes>
-            <class name="AuthorizationTests.RegistrationTests" />
+            <class name="AuthorizationTests.RegistrationPage.RegistrationTests" />
         </classes>
     </test>
 

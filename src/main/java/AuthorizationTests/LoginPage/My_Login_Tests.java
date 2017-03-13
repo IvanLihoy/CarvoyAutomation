@@ -1,7 +1,7 @@
-package AuthorizationTests;
+package AuthorizationTests.LoginPage;
 
+import Data.DataProviderClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,11 +12,13 @@ import org.testng.annotations.*;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
+import org.testng.annotations.DataProvider;
+
 
 /**
  * Created by Ivan on 03.03.2017.
  */
-public class LoginTests {
+public class My_Login_Tests {
     private static WebDriver driver;
 
         @BeforeMethod(alwaysRun = true)
@@ -53,15 +55,18 @@ public class LoginTests {
             sleep(3);
             Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='content']/div[2]/div[1]/div/div[1]")).isDisplayed());
             Assert.assertEquals("Carvoy", driver.getTitle());
-            System.out.println("User is logged in");
-
-            driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-            boolean exists = driver.findElements( By.id(".//*[@id='content']/div[2]/div[1]/div/div[1]") ).size() != 0;
-            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
+            sleep(3);
+            Actions builder = new Actions(driver);
+            WebElement move_mouse = driver.findElement(By.xpath(".//*[@id='header-for-left-menu']/div/div/nav/div/div[2]/ul/li[2]/a"));
+            builder.moveToElement(move_mouse).click().build().perform();
+            sleep(3);
+            driver.findElement(By.xpath(".//*[@id='header-for-left-menu']/div/div/nav/div/div[2]/ul/li[2]/ul/li[6]/a")).click();
+            sleep(3);
+            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a")).isDisplayed());
         }
-        @Test(dataProvider = "data-provider")
-        public static void NegativeLoginTests(String email, String pass){
+
+        @Test(dataProvider ="data-provider", dataProviderClass = DataProviderClass.class)
+        public void NegativeLoginTests(String email, String pass){
             WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
             signin_button.click();
             sleep(3);
@@ -82,19 +87,7 @@ public class LoginTests {
                 present = false;
             }
         }
-        @DataProvider(name = "data-provider")
-        public Object[][] dataProviderMethod(){
-            Object[][] data = new Object[4][2];
-            data[0][0] = "v.lihoy+2mail.ru";
-            data[0][1] = "111111";
-            data[1][0] = "v.lihoy+1@mail.ru";
-            data[1][1] = "";
-            data[2][0] = "";
-            data[2][1] = "111111";
-            data[3][0] = "";
-            data[3][1] = "";
-            return data;
-        }
+
         @Test
         public static void ForgotPasswordLinkPositiveTest(){
             WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));

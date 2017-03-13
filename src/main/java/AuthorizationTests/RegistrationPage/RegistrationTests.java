@@ -1,4 +1,4 @@
-package AuthorizationTests;
+package AuthorizationTests.RegistrationPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
