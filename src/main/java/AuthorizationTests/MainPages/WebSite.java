@@ -5,9 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- * Created by Ivan on 13.03.2017.
- */
+
+
 public class WebSite {
     public static WebDriver webDriver;
     public static WebDriverWait wait;
@@ -17,6 +16,9 @@ public class WebSite {
         wait = new WebDriverWait(driver, 10);
         PageFactory.initElements(driver, this);
     }
+
+
+
 
     public BasePage basePage(){
         return new BasePage(webDriver);
@@ -28,4 +30,9 @@ public class WebSite {
         basePage().VerifyLogin();
     }
 
+    public void negLogin(String email, String pass, String messageError) throws Exception{
+        basePage().OpenLoginPageNegativeTest();
+        basePage().LoginUserNegative(email, pass);
+        basePage().VerifyNegativeLogin(messageError);
+    }
 }

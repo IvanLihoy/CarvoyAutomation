@@ -20,4 +20,14 @@ public class DataProviderClass {
         data[3][1] = "";
         return data;
     }
+
+    @DataProvider(name = "loginData")
+    public Object[][] loginData(){
+        return new Object[][]{
+                {"v.lihoy+2mail.ru" , "111111", "Invalid email or password"},
+                {"v.lihoy+1@mail.ru", "", "Password cannot be blank."},
+                {"" , "", "E-mail cannot be blank."},
+                {"" , "111111", "E-mail cannot be blank."}
+        };
+    }
 }

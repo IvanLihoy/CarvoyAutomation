@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -60,9 +61,6 @@ public class BasePage {
         Assert.assertTrue(account_title.isDisplayed());
         Assert.assertEquals(Page_Title, webDriver.getTitle());
         Assert.assertTrue(webDriver.getCurrentUrl().contains(HOME_PAGE_URL));
-        webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-        boolean exists = webDriver.findElements(By.id(".//*[@id='content']/div[2]/div[1]/div/div[1]")).size() != 0;
-        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public void VerifyLogin() throws InterruptedException{
@@ -79,6 +77,7 @@ public class BasePage {
 
     //Negative Login User
     @FindBy(xpath = ".//*[@id='wrapper']/div[1]/div/div/div[1]/button") WebElement Close_button;
+    @FindBy(xpath = "//*[@id=\"wrapper\"]/div[1]/div/div/div[2]/div/div/form[2]") WebElement error_message;
 
     public void OpenLoginPageNegativeTest(){
         webDriver.get(BASE_URL);
@@ -93,10 +92,16 @@ public class BasePage {
         signin_button.click();
     }
 
-    public void VerifyNegativeLogin(){
+    public void VerifyNegativeLogin(String errorMessage){
        Assert.assertTrue(Close_button.isDisplayed());
        Close_button.click();
        wait.until(MyWaits.visibilityOfElement(sign_in_icon));
+       //Assert.assertEquals(errorMessage, error_message.getText());
     }
+
+
+
+
+
 
 }
