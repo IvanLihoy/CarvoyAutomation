@@ -3,15 +3,20 @@ package AuthorizationTests.LoginPage;
 import AuthorizationTests.MainPages.BasePage;
 import AuthorizationTests.MainPages.WebSite;
 import Data.DataProviderClass;
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
+import org.jsoup.Jsoup;
+import javax.lang.model.element.Element;
+import javax.lang.model.util.Elements;
+import javax.swing.text.Document;
+import javax.xml.soap.Text;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 
 /**
  * Created by Ivan on 13.03.2017.
@@ -60,9 +65,6 @@ public class NegativeLoginTest {
 //        sleep(3);
 //        Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a")).isDisplayed());
 
-        WebElement element = driver.findElement(By.xpath("//*/div/input[@data-tooltip='']"));
-        element.getAttribute("data-tooltip");
-        System.out.println(element);
         //Assert.assertEquals(driver.findElement(By.xpath("//*/div/input[@data-tooltip='']")).getText(), error);
     }
 

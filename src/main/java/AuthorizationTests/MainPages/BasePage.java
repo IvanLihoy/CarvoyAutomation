@@ -99,9 +99,4 @@ public class BasePage {
        //Assert.assertEquals(errorMessage, error_message.getText());
     }
 
-
-
-
-
-
 }
