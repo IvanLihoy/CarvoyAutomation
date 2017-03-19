@@ -1,5 +1,6 @@
 package AuthorizationTests.MainPages;
 
+import AuthorizationTests.LoginPage.ResetPassword;
 import AuthorizationTests.MainPages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -18,10 +19,11 @@ public class WebSite {
     }
 
 
-
-
     public BasePage basePage(){
         return new BasePage(webDriver);
+    }
+    public ResetPassword email() {
+        return new ResetPassword(webDriver);
     }
 
     public void PositiveLogin_Test() throws InterruptedException {
@@ -35,4 +37,14 @@ public class WebSite {
         basePage().LoginUserNegative(email, pass);
         basePage().VerifyNegativeLogin(messageError);
     }
+
+    //Reset Password
+    public void resetPasswordUser() throws Exception {
+        email().openResetLink();
+    }
+
+    //Delete Reset Message
+//    public void deleteActivationMail() throws Exception{
+//        email().deleteResetMessage();
+//    }
 }

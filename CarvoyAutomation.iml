@@ -55,5 +55,9 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.2.20.v20161216" level="project" />
     <orderEntry type="library" name="Maven: org.testng:testng:6.10" level="project" />
     <orderEntry type="library" name="Maven: com.beust:jcommander:1.48" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.5.0-b01" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.2" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20160810" level="project" />
   </component>
 </module>

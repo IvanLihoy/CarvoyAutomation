@@ -41,52 +41,52 @@ public class My_Login_Tests {
         }
 
         //@Parameters({"loginEmail", "loginPassword"})
-        @Test()
-        public static void PositiveLoginTest() {
-            WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
-            signin_button.click();
-            sleep(3);
-            WebElement login_field = driver.findElement(By.id("exampleInputEmail1"));
-            login_field.sendKeys("v.lihoy+1@mail.ru");
-            WebElement password_field = driver.findElement(By.id("exampleInputPassword1"));
-            password_field.sendKeys("111111");
-            WebElement sign_in_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/form[2]/button"));
-            sign_in_button.click();
-            sleep(3);
-            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='content']/div[2]/div[1]/div/div[1]")).isDisplayed());
-            Assert.assertEquals("Carvoy", driver.getTitle());
-            sleep(3);
-            Actions builder = new Actions(driver);
-            WebElement move_mouse = driver.findElement(By.xpath(".//*[@id='header-for-left-menu']/div/div/nav/div/div[2]/ul/li[2]/a"));
-            builder.moveToElement(move_mouse).click().build().perform();
-            sleep(3);
-            driver.findElement(By.xpath(".//*[@id='header-for-left-menu']/div/div/nav/div/div[2]/ul/li[2]/ul/li[6]/a")).click();
-            sleep(3);
-            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a")).isDisplayed());
-        }
-
-        @Test(dataProvider ="data-provider", dataProviderClass = DataProviderClass.class)
-        public void NegativeLoginTests(String email, String pass){
-            WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
-            signin_button.click();
-            sleep(3);
-            WebElement login_field = driver.findElement(By.id("exampleInputEmail1"));
-            login_field.sendKeys(email);
-            WebElement password_field = driver.findElement(By.id("exampleInputPassword1"));
-            password_field.sendKeys(pass);
-            WebElement sign_in_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/form[2]/button"));
-            sign_in_button.click();
-            sleep(3);
-            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[1]/button")).isDisplayed());
-
-            boolean present;
-            try {
-                driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[1]/button"));
-                present = true;
-            } catch (NoSuchElementException e) {
-                present = false;
-            }
-        }
+//        @Test()
+//        public static void PositiveLoginTest() {
+//            WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
+//            signin_button.click();
+//            sleep(3);
+//            WebElement login_field = driver.findElement(By.id("exampleInputEmail1"));
+//            login_field.sendKeys("v.lihoy+1@mail.ru");
+//            WebElement password_field = driver.findElement(By.id("exampleInputPassword1"));
+//            password_field.sendKeys("111111");
+//            WebElement sign_in_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/form[2]/button"));
+//            sign_in_button.click();
+//            sleep(3);
+//            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='content']/div[2]/div[1]/div/div[1]")).isDisplayed());
+//            Assert.assertEquals("Carvoy", driver.getTitle());
+//            sleep(3);
+//            Actions builder = new Actions(driver);
+//            WebElement move_mouse = driver.findElement(By.xpath(".//*[@id='header-for-left-menu']/div/div/nav/div/div[2]/ul/li[2]/a"));
+//            builder.moveToElement(move_mouse).click().build().perform();
+//            sleep(3);
+//            driver.findElement(By.xpath(".//*[@id='header-for-left-menu']/div/div/nav/div/div[2]/ul/li[2]/ul/li[6]/a")).click();
+//            sleep(3);
+//            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a")).isDisplayed());
+//        }
+//
+//        @Test(dataProvider ="data-provider", dataProviderClass = DataProviderClass.class)
+//        public void NegativeLoginTests(String email, String pass){
+//            WebElement signin_button = driver.findElement(By.xpath(".//*[@id='myCarousel']/div[2]/div/nav/div/div[2]/ul/li[3]/a"));
+//            signin_button.click();
+//            sleep(3);
+//            WebElement login_field = driver.findElement(By.id("exampleInputEmail1"));
+//            login_field.sendKeys(email);
+//            WebElement password_field = driver.findElement(By.id("exampleInputPassword1"));
+//            password_field.sendKeys(pass);
+//            WebElement sign_in_button = driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[2]/div/div/form[2]/button"));
+//            sign_in_button.click();
+//            sleep(3);
+//            Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[1]/button")).isDisplayed());
+//
+//            boolean present;
+//            try {
+//                driver.findElement(By.xpath(".//*[@id='wrapper']/div[1]/div/div/div[1]/button"));
+//                present = true;
+//            } catch (NoSuchElementException e) {
+//                present = false;
+//            }
+//        }
 
         @Test
         public static void ForgotPasswordLinkPositiveTest(){
