@@ -19,12 +19,14 @@ public class LoginTest {
     public static WebDriverWait wait;
     public BasePage basePage;
     public static WebSite website;
+    public static ResetPassword resetPassword;
 
 
     @BeforeClass
     public void setup(){
         driver = new ChromeDriver();
         basePage = new BasePage(driver);
+        resetPassword = new ResetPassword(driver);
         website = new WebSite(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -41,4 +43,19 @@ public class LoginTest {
     public void test() throws Exception{
         website.PositiveLogin_Test();
     }
+
+    //@Test
+//    public static void test() throws Exception {
+//        website.ForgotPasswordPositiveTest();
+//    }
+
+    @Test
+    public void gMailTest() throws Exception{
+        website.resetPasswordUser();
+    }
+
+//    @Test
+//    public void deleteActivationMail() throws Exception{
+//        website.deleteResetMessage();
+//    }
 }

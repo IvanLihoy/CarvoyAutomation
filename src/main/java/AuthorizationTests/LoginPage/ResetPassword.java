@@ -5,11 +5,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 //import org.testng.log4testng.Logger;
+
 
 import java.util.Properties;
 import javax.mail.*;
+
+import static AuthorizationTests.LoginPage.My_Login_Tests.sleep;
 
 
 public class ResetPassword {
@@ -22,13 +24,13 @@ public class ResetPassword {
 
     public static final String host = "pop.gmail.com";// change accordingly
     public static final String mailStoreType = "pop3s";
-    public static final String username = "lihoy@singree.com";// change accordingly
-    public static final String password = "lihoy92ivan";// change accordingly
+    public static final String username = "lihoy92ivan@gmail.com";// change accordingly
+    public static final String password = "ivan54321";// change accordingly
     //private static final Logger log = Logger.getLogger(ResetPassword.class);
 
 
-    public static String getResetLink() throws Exception {
-        String reference = null;
+    public static void getResetLink() throws Exception {
+       //String reference = null;
         Properties properties = new Properties();
         properties.put("mail.pop3.host", host);
         properties.put("mail.pop3.port", "995");
@@ -41,9 +43,9 @@ public class ResetPassword {
         Message[] messages = emailFolder.getMessages();
         int i = 0;
         for (Message message : messages) {
-            System.out.println("---------------------------------");
+            //System.out.println("---------------------------------");
             i++;
-            if (message.getSubject().contains("Your password reset request")) {
+            if (message.getSubject().contains("New login from Chrome on Windows 7")) {
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());
@@ -51,19 +53,20 @@ public class ResetPassword {
                 System.out.println("Text: " + message.getContent().toString());
                 String messageBody = message.getContent().toString();
                 Document document = Jsoup.parseBodyFragment(messageBody);
-                Elements link = document.body().getElementsByAttributeValueContaining("href", "http://leaseforlease.clever-solution.com/recovery-confirmation");
-                System.out.println(link);
-                reference = link.attr("href").toString();
-                System.out.println(reference);
+                Elements link = document.body().getElementsByAttributeValueStarting("href", "https://www.dropbox.com/");
+                System.out.println("link: " + link.attr("href"));
+//                reference = link.attr("href");
+//                System.out.println(reference);
             }
         }
-        return reference;
+      // return reference;
     }
 
     public void openResetLink() throws Exception {
-        String url = getResetLink();
-        webDriver.get(url);
-        Thread.sleep(5000);
+        getResetLink();
+//        String url = getResetLink();
+//        webDriver.get(url);
+        sleep(10);
     }
 
 

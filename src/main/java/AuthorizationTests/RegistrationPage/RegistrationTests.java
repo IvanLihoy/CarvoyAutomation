@@ -1,10 +1,11 @@
 package AuthorizationTests.RegistrationPage;
 
+import AuthorizationTests.LoginPage.ResetPassword;
+import AuthorizationTests.MainPages.WebSite;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,6 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 public class RegistrationTests {
     private static WebDriver driver;
+    public static WebSite website;
+
+
+
 
     @BeforeMethod(alwaysRun = true)
     public static void setup() {
@@ -58,4 +63,5 @@ public class RegistrationTests {
         signup_button_click.click();
         sleep(3);
     }
+
 }
