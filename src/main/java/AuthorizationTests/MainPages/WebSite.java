@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.mail.Message;
 
 
 public class WebSite {
@@ -41,7 +42,7 @@ public class WebSite {
 
     //Reset Password
     public void resetPasswordUser() throws Exception {
-        email().openResetLink();
+        email().openActivationLink();
     }
 
     //Delete Reset Message
